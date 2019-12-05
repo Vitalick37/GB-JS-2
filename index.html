@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        header {
+            display: flex;
+            flex-direction: row-reverse;
+            margin: 50px 20px 50px 0;
+        }
+
+        button {
+            text-decoration: none;
+            background: #30A8E6;
+            color: #fff;
+            padding: 10px;
+            font-family: arial;
+            border-radius: 4px;
+            -moz-transition: all 0.3s 0.01s ease;
+            -o-transition: all 0.3s 0.01s ease;
+            -webkit-transition: all 0.3s 0.01s ease;
+
+        }
+
+        button:hover {
+            background: #1C85BB;
+        }
+
+        .goods-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .goods-item {
+            padding: 10px 30px;
+            background: linear-gradient(to left, #f8ab8d 0%, white, #f8ab8d);
+            border-bottom: 1px solid grey;
+            color: #506a6b;
+            font-size: 20px;
+            box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
+            
+            width: 250px;
+            display: flex;
+            justify-content: space-evenly;
+            margin: 0 5px 5px 5px;
+        }
+
+        .goods-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="cart-button">Корзина</button>
+
+    </header>
+    <main>
+        <div class="goods-list"></div>
+    </main>
+    <script src="app.js"></script>
+</body>
+
+</html>
