@@ -8,15 +8,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="reset.css">
     <style>
-        header {
+        .header {
             display: flex;
             flex-direction: row-reverse;
-            margin: 50px 20px 50px 0;
+            padding: 50px 20px 25px 0;
+            border-bottom: 2px solid black;
         }
 
-        button {
+        .cart-button {
             text-decoration: none;
-            background: #30A8E6;
+            background: rgb(122, 194, 230);
             color: #fff;
             padding: 10px;
             font-family: arial;
@@ -27,13 +28,13 @@
 
         }
 
-        button:hover {
+        .cart-button:hover {
             background: #1C85BB;
         }
 
         .goods-list {
             list-style: none;
-            padding: 0;
+            padding: 25px 10px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -41,16 +42,20 @@
 
         .goods-item {
             padding: 10px 30px;
-            background: linear-gradient(to left, #f8ab8d 0%, white, #f8ab8d);
+            /* background: linear-gradient(to left, rgb(100, 178, 218) 0%, white, rgb(122, 194, 230)); */
+            background: #fffff0;
             border-bottom: 1px solid grey;
             color: #506a6b;
             font-size: 20px;
             box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
             
-            width: 250px;
+            width: 200px;
             display: flex;
-            justify-content: space-evenly;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             margin: 0 5px 5px 5px;
+
         }
 
         .goods-item:last-child {
@@ -60,11 +65,12 @@
 </head>
 
 <body>
-    <header>
+    <header class="header">
         <button class="cart-button">Корзина</button>
 
     </header>
     <main>
+        
         <div class="goods-list"></div>
     </main>
     <script src="app.js"></script>
