@@ -24,7 +24,7 @@
             -moz-transition: all 0.3s 0.01s ease;
             -o-transition: all 0.3s 0.01s ease;
             -webkit-transition: all 0.3s 0.01s ease;
-
+            position: absolute;
         }
 
         .cart-button:hover {
@@ -47,7 +47,7 @@
             color: #506a6b;
             font-size: 20px;
             box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
-            
+
             width: 200px;
             display: flex;
             flex-wrap: wrap;
@@ -60,16 +60,60 @@
         .goods-item:last-child {
             border-bottom: none;
         }
+
+        /* Корзина_________________________________ */
+        .shopping-cart {
+            display: none;
+            width: 450px;
+            height: 423px;
+            margin: 80px auto;
+            background: #FFFFFF;
+            box-shadow: 10px -10px 3px 0px rgba(0, 0, 0, 0.10);
+            border-radius: 6px;
+            flex-direction: column;
+            position: relative;
+            top: -10px;
+            left: 115px;
+        }
+
+        .title {
+            height: 60px;
+            border-bottom: 1px solid #E1E8EE;
+            padding: 20px 30px;
+            color: #5E6977;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .item {
+            padding: 20px 30px;
+            height: 120px;
+            display: flex;
+        }
+
+        .item:nth-child(3) {
+            border-top: 1px solid #E1E8EE;
+            border-bottom: 1px solid #E1E8EE;
+        }
     </style>
 </head>
 
 <body>
+
     <header class="header">
         <button class="cart-button">Корзина</button>
-
+        <div class="shopping-cart">
+            <div class="title">
+                Shopping Bag
+            </div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <button class="cart-close">Закрыть</button>
+        </div>
     </header>
     <main>
-        
+
         <div class="goods-list"></div>
     </main>
     <script src="app.js"></script>

@@ -1,33 +1,33 @@
 'use strict';
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
-function makeGETRequest (url,callback) {
-let xhr;
-return new Promise((resolve, reject) => {
-if (window.XMLHttpRequest) {
-    xhr = new window.XMLHttpRequest();
-} else {
-    xhr = new window.ActiveXObject('Microsoft.XMLHTTP');
-}
+function makeGETRequest(url, callback) {
+    let xhr;
+    return new Promise((resolve, reject) => {
+        if (window.XMLHttpRequest) {
+            xhr = new window.XMLHttpRequest();
+        } else {
+            xhr = new window.ActiveXObject('Microsoft.XMLHTTP');
+        }
 
-xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-// callback(JSON.parse(xhr.responseText));
-let body = (JSON.parse(xhr.responseText));
-resolve(body);
-    } else {
-        reject({error: xhr.status});
-    }
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                // callback(JSON.parse(xhr.responseText));
+                let body = (JSON.parse(xhr.responseText));
+                resolve(body);
+            } else {
+                reject({ error: xhr.status });
+            }
 
-};
-xhr.open('GET', url);
-xhr.send();
+        };
+        xhr.open('GET', url);
+        xhr.send();
 
-})
+    })
 };
 
 fetch(`${API_URL}/catalogData.json`)
-.then(body => body.json());
+    .then(body => body.json());
 
 class GoodsItem {
     constructor(title, price) {
@@ -46,17 +46,17 @@ class GoodsList {
         this.goods = [];
     }
     fetchGoods() {
-        
+
         makeGETRequest(`${API_URL}/catalogData.json`)
-            .then(this.goods, function() {
-                return this.goods;   
-        })
-       
-    .then(res => {
-        this.goods = res;
-        this.render()
-    }) 
-    .catch(err => console.error(err));
+            .then(this.goods, function () {
+                return this.goods;
+            })
+
+            .then(res => {
+                this.goods = res;
+                this.render()
+            })
+            .catch(err => console.error(err));
     }
     render() {
         let listHtml = '';
@@ -75,7 +75,7 @@ class GoodsList {
     }
 };
 let list = new GoodsList();
-list.fetchGoods( () => {
+list.fetchGoods(() => {
     list.render();
 });
 
@@ -110,6 +110,23 @@ class CrateGoods {
             let goodsItem = new CrateGoodsItem(good.title, good.price, good.count);
             listHtml += goodsItem.render();
         });
-       
+
     }
 };
+// 
+// 
+// Открытие\закрытие корзины
+
+let openCart = document.querySelector('.cart-button'),
+    cart = document.querySelector('.shopping-cart'),
+    close = document.querySelector('.cart-close');
+
+
+openCart.addEventListener('click', function () {
+    cart.style.display = 'flex';
+});
+
+
+close.addEventListener('click', function () {
+    cart.style.display = 'none';
+});
