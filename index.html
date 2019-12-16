@@ -24,7 +24,11 @@
             -moz-transition: all 0.3s 0.01s ease;
             -o-transition: all 0.3s 0.01s ease;
             -webkit-transition: all 0.3s 0.01s ease;
-            position: absolute;
+            position: relative;
+        }
+
+        .goods-add {
+            width: 160px;
         }
 
         .cart-button:hover {
@@ -47,7 +51,6 @@
             color: #506a6b;
             font-size: 20px;
             box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
-
             width: 200px;
             display: flex;
             flex-wrap: wrap;
@@ -65,15 +68,14 @@
         .shopping-cart {
             display: none;
             width: 450px;
-            height: 423px;
             margin: 80px auto;
             background: #FFFFFF;
-            box-shadow: 10px -10px 3px 0px rgba(0, 0, 0, 0.10);
+            box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
             border-radius: 6px;
             flex-direction: column;
-            position: relative;
-            top: -10px;
-            left: 115px;
+            position: absolute;
+            top: -5px;
+            left: 250px;
         }
 
         .title {
@@ -95,6 +97,10 @@
             border-top: 1px solid #E1E8EE;
             border-bottom: 1px solid #E1E8EE;
         }
+
+        .cart-close {
+            width: 80px;
+        }
     </style>
 </head>
 
@@ -107,14 +113,12 @@
                 Shopping Bag
             </div>
             <div class="item"></div>
-            <div class="item"></div>
-            <div class="item"></div>
             <button class="cart-close">Закрыть</button>
         </div>
     </header>
     <main>
-
-        <div class="goods-list"></div>
+        <div class="goods-list">
+        </div>
     </main>
     <script src="app.js"></script>
 </body>

@@ -1,9 +1,9 @@
 'use strict';
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
-function makeGETRequest(url, callback) {
-    let xhr;
-    return new Promise((resolve, reject) => {
+function makeGETRequest(url) {
+    return new Promise((resolve) => {
+        let xhr;
         if (window.XMLHttpRequest) {
             xhr = new window.XMLHttpRequest();
         } else {
@@ -11,23 +11,18 @@ function makeGETRequest(url, callback) {
         }
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                // callback(JSON.parse(xhr.responseText));
-                let body = (JSON.parse(xhr.responseText));
-                resolve(body);
-            } else {
-                reject({ error: xhr.status });
-            }
+            if (xhr.readyState == 4 && xhr.status == 200);
+            let body = (JSON.parse(xhr.responseText));
+            resolve(body);
+        }
 
-        };
         xhr.open('GET', url);
         xhr.send();
-
-    })
+    });
 };
 
-fetch(`${API_URL}/catalogData.json`)
-    .then(body => body.json());
+
+
 
 class GoodsItem {
     constructor(title, price) {
@@ -35,7 +30,7 @@ class GoodsItem {
         this.price = price;
     }
     render() {
-        return `<div class="goods-item"><img src="img/photo_widjet_3.png" alt="foto"><h3>${this.title}</h3><p>${this.price}</p></div>`;
+        return `<div class="goods-item"><img src="img/photo_widjet_3.png" alt="foto"><h3>${this.title}</h3><p>${this.price}</p><button class="goods-add">Добавить</button></div>`;
     }
 };
 // 
@@ -97,6 +92,8 @@ class CrateGoodsItem {
 // 
 // 
 // Крзина товаров
+
+
 class CrateGoods {
     constructor() {
         this.goods = [];
@@ -112,6 +109,7 @@ class CrateGoods {
         });
 
     }
+
 };
 // 
 // 
@@ -130,3 +128,4 @@ openCart.addEventListener('click', function () {
 close.addEventListener('click', function () {
     cart.style.display = 'none';
 });
+
