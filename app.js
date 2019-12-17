@@ -1,8 +1,9 @@
 'use strict';
 
 const API_URL = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+
 function makeGETRequest(url) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         let xhr;
         if (window.XMLHttpRequest) {
             xhr = new window.XMLHttpRequest();
@@ -11,10 +12,14 @@ function makeGETRequest(url) {
         }
 
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200);
-            let body = (JSON.parse(xhr.responseText));
-            resolve(body);
-        }
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                let body = (JSON.parse(xhr.responseText));
+                resolve(body);
+            }
+            xhr.onerror = function (err) {
+                PromiseRejectionEvent(err);
+            }
+        };
 
         xhr.open('GET', url);
         xhr.send();
@@ -41,18 +46,17 @@ class GoodsList {
         this.goods = [];
     }
     fetchGoods() {
+        return makeGETRequest(`${API_URL}/catalogData.json`).then((goods) => {
+                this.goods = goods;
+            });
+        }
 
-        makeGETRequest(`${API_URL}/catalogData.json`)
-            .then(this.goods, function () {
-                return this.goods;
-            })
-
-            .then(res => {
-                this.goods = res;
-                this.render()
-            })
-            .catch(err => console.error(err));
-    }
+        // .then(res => {
+        //     this.goods = res;
+        //     this.render()
+        // })
+        // .catch(err => console.error(err));
+    
     render() {
         let listHtml = '';
         this.goods.forEach(good => {
@@ -70,7 +74,7 @@ class GoodsList {
     }
 };
 let list = new GoodsList();
-list.fetchGoods(() => {
+list.fetchGoods().then(() => {
     list.render();
 });
 
@@ -79,7 +83,7 @@ list.sumGoods();
 // 
 // Товар в корзине
 
-class CrateGoodsItem {
+class CartGoodsItem {
     constructor(title, price, count) {
         this.title = title;
         this.price = price;
@@ -94,7 +98,7 @@ class CrateGoodsItem {
 // Крзина товаров
 
 
-class CrateGoods {
+class CartGoods {
     constructor() {
         this.goods = [];
     }
@@ -128,4 +132,3 @@ openCart.addEventListener('click', function () {
 close.addEventListener('click', function () {
     cart.style.display = 'none';
 });
-
