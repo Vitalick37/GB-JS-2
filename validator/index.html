@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#" id="myForm" novalidate>
+        <div>
+            <label>
+                Your name <br>
+                <input type="text" name="name" id="name">
+            </label>
+        </div>
+        <div>
+            <label>
+                Your phone <br>
+                <input type="tel" name="phone" id="phone">
+            </label>
+        </div>
+        <div>
+            <label>
+                Email <br>
+                <input type="text" name="email" id="email">
+            </label>
+        </div>
+        <button class="btn">Выполнить</button>
+    </form>
+
+    <script src='app.js'></script>
+    <script>
+       const myForm = document.querySelector('#myForm');
+myForm.addEventListener('submit', (e) => {
+e.preventDefault();
+new Validator(myForm);
+})
+    </script>
+</body>
+
+</html>
