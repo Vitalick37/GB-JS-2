@@ -1,6 +1,9 @@
 'use strict';
 
-let text = 'Lorem ipsum, \'dolor\' sit amet can\'t consectetur adipisicing elit';
-let regexp = /\'/g;
-let text2 = text.replace(regexp, '"');
-console.log(text2);
+let text = document.querySelector('.text'),
+    btnReplace = document.querySelector('.replace');
+
+btnReplace.addEventListener('click', () => {
+    let regexp = /\B'|'\B/g;
+    text.textContent = text.textContent.replace(regexp, '"');
+});
