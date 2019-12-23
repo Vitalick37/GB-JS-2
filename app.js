@@ -44,22 +44,33 @@ class GoodsItem {
 class GoodsList {
     constructor() {
         this.goods = [];
+        this.filteredGoods = [];
+        this.initEvents();
     }
     fetchGoods() {
         return makeGETRequest(`${API_URL}/catalogData.json`).then((goods) => {
-                this.goods = goods;
-            });
-        }
-
-        // .then(res => {
-        //     this.goods = res;
-        //     this.render()
-        // })
-        // .catch(err => console.error(err));
+            this.goods = goods;
+            this.filteredGoods = goods;
+        });
+    }
+    filterGoods(value) {
+        let regexp = new RegExp(value, 'i');
+        this.filteredGoods = this.goods.filter((good) => regexp.test(good.product_name));
+            this.render();
+    }
+    initEvents() {
+        let searchForm = document.querySelector('.search-form');
+        let searchInput = document.querySelector('.search-input');
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let value = searchInput.value;
+            this.filterGoods(value);
+        })
+    }
     
     render() {
         let listHtml = '';
-        this.goods.forEach(good => {
+        this.filteredGoods.forEach(good => {
             let goodsItem = new GoodsItem(good.product_name, good.price);
             listHtml += goodsItem.render();
         });

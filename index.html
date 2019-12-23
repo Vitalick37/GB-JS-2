@@ -10,8 +10,8 @@
     <style>
         .header {
             display: flex;
-            flex-direction: row-reverse;
-            margin: 30px 20px 30px 0;
+            justify-content: space-between;
+            margin: 30px 20px 30px 20px;
         }
 
         .cart-button {
@@ -107,6 +107,10 @@
 <body>
 
     <header class="header">
+        <form class="search-form">
+            <input type="text" class="search-input">
+             <button class="search-btn">Искать</button>   
+        </form>
         <button class="cart-button">Корзина</button>
         <div class="shopping-cart">
             <div class="title">
