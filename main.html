@@ -7,7 +7,31 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app"></div>
+    <header class="header">
+        <form class="search-form">
+            <input type="text" class="search-input" v-model="filterGoods">
+             <button class="search-btn">Искать</button>   
+        </form>
+        <button class="cart-button">Корзина</button>
+        <div class="shopping-cart">
+            <div class="title">
+                Shopping Bag
+            </div>
+            <div class="item"></div>
+            <button class="cart-close">Закрыть</button>
+        </div>
+    </header>
+    <main>
+    <div id="app">
+        <div class="goods-list">
+            <div class="goods-item" v-for="good in filterGoods" :key="good.id_product">
+                <h3>{{ good.product_name }}</h3>
+                <p>{{ good.price }}</p>
+            </div>
+        </div>
+        
+    </div>
+</main>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="appMain.js"></script>
 </body>
