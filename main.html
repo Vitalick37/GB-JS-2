@@ -1,38 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-</head>
-<body>
-    <header class="header">
-        <form class="search-form">
-            <input type="text" class="search-input" v-model="filterGoods">
-             <button class="search-btn">Искать</button>   
-        </form>
-        <button class="cart-button">Корзина</button>
-        <div class="shopping-cart">
-            <div class="title">
-                Shopping Bag
-            </div>
-            <div class="item"></div>
-            <button class="cart-close">Закрыть</button>
-        </div>
-    </header>
-    <main>
-    <div id="app">
-        <div class="goods-list">
-            <div class="goods-item" v-for="good in filterGoods" :key="good.id_product">
-                <h3>{{ good.product_name }}</h3>
-                <p>{{ good.price }}</p>
-            </div>
-        </div>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 30px 20px 30px 20px;
+            background-color: #5E6977;
+        }
+
+        .cart-button {
+            height: 44px;
+            text-decoration: none;
+            background: #7BA7AB;
+            color: #fff;
+            padding: 10px;
+            font-family: arial;
+            border-radius: 4px;
+            -moz-transition: all 0.3s 0.01s ease;
+            -o-transition: all 0.3s 0.01s ease;
+            -webkit-transition: all 0.3s 0.01s ease;
+            position: relative;
+            border: 2px solid #7BA7AB;
+        }
+
+        .goods-add {
+            width: 160px;
+        }
+
+        .cart-button:hover {
+            background: rgb(47, 83, 87);
+        }
         
+        .goods-list {
+            list-style: none;
+            padding: 25px 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: start;
+        }
+
+        .goods-item {
+            padding: 10px 30px;
+            background: #fffff0;
+            border-bottom: 1px solid grey;
+            color: #506a6b;
+            font-size: 20px;
+            box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .2);
+            width: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 5px 5px 5px;
+
+        }
+
+        /* Корзина_________________________________ */
+        .shopping-cart {
+
+            width: 450px;
+            margin: 80px auto;
+            background: #7BA7AB;
+            box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            flex-direction: column;
+            position: absolute;
+            top: 40px;
+            right: 20px;
+        }
+
+        .title {
+            height: 60px;
+            border-bottom: 1px solid #E1E8EE;
+            padding: 20px 30px;
+            color: #5E6977;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .item {
+            padding: 20px 30px;
+            height: 120px;
+            display: flex;
+        }
+
+        .item:nth-child(3) {
+            border-top: 1px solid #E1E8EE;
+            border-bottom: 1px solid #E1E8EE;
+        }
+
+        .cart-close {
+            width: 80px;
+        }
+/* Поле поиска_________________________________ */
+        .search-input {
+  height: 42px;
+  padding-left: 10px;
+  border: 2px solid #7BA7AB;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  background: #F9F0DA;
+  color: #9E9C9C;
+
+        }
+        .search-btn {
+  height: 44px;
+  border: none;
+  background: #7BA7AB;
+  border-radius: 0 5px 5px 0;
+  color: #fff;
+            padding: 10px;
+            font-family: arial;
+            border: 2px solid #7BA7AB;
+           
+}
+.search-btn:hover {
+            background: rgb(47, 83, 87);
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <header class="header">
+            <form class="search-form" @submit.prevent="filterGoods">
+                <input type="text" placeholder="Искать здесь..." class="search-input" v-model.trim="searchLine">
+                <button class="search-btn">Искать</button>
+            </form>
+            <button class="cart-button" @click="toggleCartVisibile">Корзина</button>
+            <div class="shopping-cart" v-if="isVisibleCart">
+                <div class="title">
+                    Shopping Bag
+                </div>
+                <div class="item"></div>
+
+            </div>
+        </header>
+        <main>
+
+            <div class="goods-list">
+                <div class="goods-item" v-for="good in filteredGoods" :key="good.id_product">
+                    <h3>{{ good.product_name }}</h3>
+                    <p>{{ good.price }}</p>
+                </div>
+            </div>
+
     </div>
-</main>
+    </main>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="appMain.js"></script>
 </body>
+
 </html>

@@ -4,14 +4,13 @@ const app = new Vue({
     el: '#app',
     data: {
         goods: [],
-        filterGoods: [],
-        searchLine: ''
+        filteredGoods: [],
+        searchLine: '',
+        isVisibleCart: false,
         
+
     },
 
-    computed: {
-       
-    },
     methods: {
         makeGETRequest(url) {
             return new Promise((resolve, reject) => {
@@ -35,16 +34,24 @@ const app = new Vue({
                 xhr.open('GET', url);
                 xhr.send();
             });
-        }
+        },
+        filterGoods() {
+            const regexp = new RegExp(this.searchLine, 'i');
+            this.filteredGoods = this.goods.filter((good) => regexp.test(good.product_name));
 
+        },
+        toggleCartVisibile() {
+           this.isVisibleCart = !this.isVisibleCart; 
+        },
+    
     },
     async mounted() {
         try {
             this.goods = await this.makeGETRequest(`${API_URL}/catalogData.json`);
-            this.filterGoods = [... this.goods];
+            this.filteredGoods = [... this.goods];
         } catch (e) {
             console.error(e);
         }
     }
-   
+
 });
