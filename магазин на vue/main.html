@@ -36,7 +36,7 @@
         .cart-button:hover {
             background: rgb(47, 83, 87);
         }
-        
+
         .goods-list {
             list-style: none;
             padding: 25px 10px;
@@ -59,6 +59,10 @@
             align-items: center;
             margin: 0 5px 5px 5px;
 
+        }
+
+        .not-found-items {
+            text-align: center;
         }
 
         /* Корзина_________________________________ */
@@ -98,32 +102,34 @@
         .cart-close {
             width: 80px;
         }
-/* Поле поиска_________________________________ */
+
+        /* Поле поиска_________________________________ */
         .search-input {
-  height: 42px;
-  padding-left: 10px;
-  border: 2px solid #7BA7AB;
-  border-radius: 5px 0 0 5px;
-  outline: none;
-  background: #F9F0DA;
-  color: #9E9C9C;
+            height: 42px;
+            padding-left: 10px;
+            border: 2px solid #7BA7AB;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            background: #F9F0DA;
+            color: #9E9C9C;
 
         }
+
         .search-btn {
-  height: 44px;
-  border: none;
-  background: #7BA7AB;
-  border-radius: 0 5px 5px 0;
-  color: #fff;
+            height: 44px;
+            border: none;
+            background: #7BA7AB;
+            border-radius: 0 5px 5px 0;
+            color: #fff;
             padding: 10px;
             font-family: arial;
             border: 2px solid #7BA7AB;
-           
-}
-.search-btn:hover {
-            background: rgb(47, 83, 87);
+
         }
 
+        .search-btn:hover {
+            background: rgb(47, 83, 87);
+        }
     </style>
 </head>
 
@@ -145,13 +151,15 @@
         </header>
         <main>
 
-            <div class="goods-list">
+            <div class="goods-list" v-if="!isFilteredGoodsEmpty">
                 <div class="goods-item" v-for="good in filteredGoods" :key="good.id_product">
                     <h3>{{ good.product_name }}</h3>
                     <p>{{ good.price }}</p>
                 </div>
             </div>
-
+            <div class="not-found-items" v-else>
+                <h2>Нет данных</h2>
+            </div>
     </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

@@ -7,8 +7,13 @@ const app = new Vue({
         filteredGoods: [],
         searchLine: '',
         isVisibleCart: false,
-        
 
+
+    },
+    computed: {
+        isFilteredGoodsEmpty() {
+            return this.filteredGoods.length == 0;
+        }
     },
 
     methods: {
@@ -41,14 +46,14 @@ const app = new Vue({
 
         },
         toggleCartVisibile() {
-           this.isVisibleCart = !this.isVisibleCart; 
+            this.isVisibleCart = !this.isVisibleCart;
         },
-    
+
     },
     async mounted() {
         try {
             this.goods = await this.makeGETRequest(`${API_URL}/catalogData.json`);
-            this.filteredGoods = [... this.goods];
+            this.filteredGoods = [...this.goods];
         } catch (e) {
             console.error(e);
         }
